@@ -35,3 +35,35 @@ The Chat Application consists of the following files:
 - `index.js`: This file contains the code for the server that host html and handle websocket queries.
 - `pug` template: This file contains the HTML layout for the Chat Application.
 
+```mermaid
+sequenceDiagram
+    participant User
+    participant Web Browser
+    participant Web Server
+    participant WebSocket Server
+
+    User ->> Web Browser: Open Chat Application
+    Web Browser ->> Web Server: GET /index.html
+    Web Server ->> Web Browser: index.html
+    Web Browser ->> User: Render index.html
+
+    User ->> Web Browser: Enter Username and Message
+    Web Browser ->> WebSocket Server: WebSocket Connect
+    WebSocket Server ->> Web Browser: Connection Acknowledged
+
+    User ->> Web Browser: Click Send Button
+    Web Browser ->> WebSocket Server: Send Message (JSON)
+    WebSocket Server ->> Web Browser: Receive Message (JSON)
+    WebSocket Server ->> WebSocket Server: Broadcast Message
+
+    Web Browser ->> User: Display Message
+
+### Diagramme de cas d'utilisation
+
+```markdown
+```mermaid
+graph TD
+    User --> Connect to Server
+    User --> Send Message
+    User --> Receive Message
+
